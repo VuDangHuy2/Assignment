@@ -12,38 +12,48 @@ public class Processor {
 
         do {
             System.out.println("====== MENU ======");
-            System.out.println("1. Add student");
-            System.out.println("2. Delete student by id");
-            System.out.println("3. Find student by id");
-            System.out.println("4. Diplay student list");
-            System.out.println("5. Find top student");
+            System.out.println("1. Add new student");
+            System.out.println("2. Add new teacher");
+            System.out.println("3. Update person by id");
+            System.out.println("4. Delete person by id");
+            System.out.println("5. Diplay all student and teacher");
+            System.out.println("6. Find the student with the highest GPA");
+            System.out.println("7. Find teachers by department");
             System.out.println("0. exit");
             System.out.print("Please choice: ");
             choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    studentList.addStudent(new Student());
+                    studentList.addStudent();
                     break;
                 case 2:
-                    scanner.nextLine();
-                    System.out.print("Enter id of student you want to remove: ");
-                    String id = scanner.nextLine();
-                    studentList.deletePersonById(id);
+                    studentList.addTeacher();
                     break;
-
                 case 3:
                     scanner.nextLine();
-                    System.out.print("Enter id of student you want to find: ");
-                    id = scanner.nextLine();
-                    studentList.findPersonByID(id);
+                    System.out.print("Enter id: ");
+                    String id = scanner.nextLine();
+                    studentList.updatePerson(id);
                     break;
                 case 4:
-                    studentList.displayEveryone();
+                    scanner.nextLine();
+                    System.out.print("Enter id of student you want to remove: ");
+                    id = scanner.nextLine();
+                    studentList.deletePersonById(id);
                     break;
                 case 5:
+                    studentList.displayEveryone();
+                    break;
+                case 6:
                     System.out.println("Top student is:");
                     studentList.findTopStudent().displayInfo();
+                    break;
+                case 7:
+                    scanner.nextLine();
+                    System.out.print("Enter departmet of teacher you want to find: ");
+                    String departmet = scanner.nextLine();
+                    studentList.findTeacherByDepartment(departmet);
                     break;
                 case 0:
                     System.out.println("Exit program.");
