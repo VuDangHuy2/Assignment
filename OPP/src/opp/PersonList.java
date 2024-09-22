@@ -1,7 +1,6 @@
 package opp;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class PersonList {
@@ -24,35 +23,40 @@ public class PersonList {
         this.personList = personList;
     }
 
-    public void addStudent(Student student) {
+    public void addStudent() {
         System.out.print("Enter number of student you want to add: ");
         int n = scan.nextInt();
         for (int i = 0; i < n; i++) {
             System.out.println("Enter information of student " + (i + 1));
+            Student student = new Student();
             student.addPerson();
             this.personList.add(student);
         }
     }
 
-    public void addTeacher(Teacher teacher) {
+    public void addTeacher() {
         System.out.print("Enter number of teacher you want to add: ");
         int n = scan.nextInt();
         for (int i = 0; i < n; i++) {
             System.out.println("Enter information of student " + (i + 1));
+            Teacher teacher = new Teacher();
             teacher.addPerson();
             this.personList.add(teacher);
         }
     }
 
     public void updatePerson(String id) {
-        System.out.print("Enter id: ");
-        id = scan.nextLine();
+        int i = 0;
         for (Person person : personList) {
             if (person.getId().equals(id)) {
                 person.updatePerson(id);
-            }
+                System.out.println("Update successfully!");
+                i++;
+            } 
         }
-
+        if (i==0){
+        System.out.println("No person has id " + id);
+        }
     }
 
     public void deletePersonById(String id) {
@@ -96,7 +100,7 @@ public class PersonList {
         Student topStudent = null;
         for (Person person : personList) {
             if (person instanceof Student student) {
-                if (topStudent.getGpa() < student.getGpa()) {
+                if (topStudent == null ||  topStudent.getGpa() < student.getGpa()) {
                     topStudent = student;
                 }
             }
@@ -106,7 +110,7 @@ public class PersonList {
         }
         return topStudent;
     }
-    
+
     Teacher findTeacherByDepartment(String department) {
         if (personList.isEmpty()) {
             System.out.println("Student list is emty!");
@@ -117,16 +121,11 @@ public class PersonList {
                 if (teacher.getDepartmet().equals(department)) {
                     System.out.println("Information of this teacher:");
                     teacher.displayInfo();
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
                 }
             }
         }
-        
         return null;
     }
-    }
-        
-        
-        
-    
-
-
+}
